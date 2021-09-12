@@ -126,6 +126,83 @@ const openConvo = (id) => {
             0,
             document.getElementsByClassName("rs-message-box")[0].scrollHeight
           );
+
+        current["batch"] = "latest";
+        document
+          .getElementsByClassName("rs-message-box")[0]
+          .addEventListener("scroll", (e) => {
+            const scroll = e.target.scrollTop;
+
+            if (e.target.scrollTop < 5 && current["scrollLoading"] != true) {
+              if (current["batch"] != "fin") {
+                if (current["batch"] == "latest") {
+                  current["batch"] = 0;
+                }
+
+                console.log("yes");
+
+                current["batch"] += 1;
+                current["scrollLoading"] = true;
+
+                fetch(
+                  `https://cribapi.ceccun.com/api/v1/chat/conversations/${current["conversation"]}/${current["batch"]}`,
+                  {
+                    headers: {
+                      authorization: ls.getItem("token"),
+                    },
+                  }
+                ).then((response) => {
+                  if (response.status == 200) {
+                    response.json().then((data) => {
+                      const currentScrollHeight =
+                        document.getElementsByClassName("rs-message-box")[0]
+                          .scrollHeight;
+
+                      const currentScrollTop =
+                        document.getElementsByClassName("rs-message-box")[0]
+                          .scrollTop;
+
+                      if (data.error == "1") {
+                        var newElement = document.createElement("div");
+                        newElement.setAttribute(
+                          "id",
+                          `${current["batch"]}_field`
+                        );
+                        document
+                          .getElementsByClassName("rs-message-box")[0]
+                          .prepend(newElement);
+
+                        data.content.forEach((item, index) => {
+                          parseMessage(
+                            item.content,
+                            item.author,
+                            0,
+                            undefined,
+                            item.type,
+                            item.id,
+                            document.getElementById(`${current["batch"]}_field`)
+                          );
+                          document
+                            .getElementsByClassName("rs-message-box")[0]
+                            .scrollTo(
+                              0,
+                              document.getElementsByClassName(
+                                "rs-message-box"
+                              )[0].scrollHeight -
+                                currentScrollHeight +
+                                currentScrollTop
+                            );
+                        });
+                        current["scrollLoading"] = false;
+                      }
+                    });
+                  } else {
+                    current["batch"] = "fin";
+                  }
+                });
+              }
+            }
+          });
       });
     }
   });
@@ -179,7 +256,8 @@ const parseMessage = (
   time,
   reply = undefined,
   type,
-  id = undefined
+  id = undefined,
+  element = document.getElementsByClassName("rs-message-box")[0]
 ) => {
   const messageUUID = btoa(Math.random());
   var ls = window.localStorage;
@@ -213,17 +291,20 @@ const parseMessage = (
   chatModal.appendChild(author);
   chatModal.appendChild(content);
 
-  document.getElementsByClassName("rs-message-box")[0].appendChild(chatModal);
+  element.appendChild(chatModal);
 
   resolveName(authorID, (authorName, pfpLink) => {
     document.getElementById(`${messageUUID}_author`).innerText = authorName;
   });
-  document
-    .getElementsByClassName("rs-message-box")[0]
-    .scrollTo(
-      0,
-      document.getElementsByClassName("rs-message-box")[0].scrollHeight
-    );
+
+  if (element == document.getElementsByClassName("rs-message-box")[0]) {
+    document
+      .getElementsByClassName("rs-message-box")[0]
+      .scrollTo(
+        0,
+        document.getElementsByClassName("rs-message-box")[0].scrollHeight
+      );
+  }
 };
 
 const resolveName = (id, cb = () => {}) => {
