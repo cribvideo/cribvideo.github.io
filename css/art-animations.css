@@ -1,0 +1,33 @@
+.updcirc {
+  position: relative;
+  animation: upDownCirc 2s ease-out infinite;
+}
+
+@keyframes upDownCirc {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.send-btn:hover #send-polygon {
+  animation: sendPoly 0.6s ease forwards;
+}
+
+@keyframes sendPoly {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(50px);
+  }
+  51% {
+    transform: translateX(-50px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}

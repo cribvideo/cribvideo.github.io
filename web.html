@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crib Web</title>
     <link rel="stylesheet" href="/css/web.css">
+    <link rel="stylesheet" href="/css/art-animations.css">
 </head>
 <body>
 
@@ -17,7 +18,7 @@
                     <div class="top-header">
                         <h1>
                             <img src="https://eu.ui-avatars.com/api/?name=Ejaz%20Ali" class="pfp" />
-                            <h2 style="line-height: 50px;">Ejaz Ali</h2>
+                            <h2 id="@me-name" style="line-height: 50px;"></h2>
                         </h1>
                     </div>
 
@@ -28,11 +29,91 @@
                     
 
                 </div>
-                <img src="https://ceccun.com/images/loading-thin-normal.png" class="loading-spinner" style="position: relative; left: 50%; transform: translateX(-50%);"/>
+                <img src="https://ceccun.com/images/loading-thin-normal.png" id="chats-list-loader" class="loading-spinner" style="position: relative; left: 50%; transform: translateX(-50%);"/>
 
             </div>
             <div class="rs">
+                <div class="rs-welcome">
+                    <div id="random-image" style="width: 250px">
+                        <svg viewBox="0 0 1001 1001" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="Frame 40">
+                                <circle id="Ellipse 48" cx="500.5" cy="500.5" r="373.5" fill="#FA0053" />
+                                <g id="Group 286">
+                                    <g id="Group 284">
+                                        <g id="Rectangle 147">
+                                            <rect x="61" y="556" width="586" height="212" rx="66" fill="white" />
+                                            <rect x="65" y="560" width="578" height="204" rx="62" stroke="black" stroke-opacity="0.1"
+                                                stroke-width="8" />
+                                        </g>
+                                    </g>
+                                    <circle id="Ellipse 49" style="animation-delay: 0.7s;" class="updcirc" cx="354" cy="663" r="41" fill="#C4C4C4" />
+                                    <circle id="Ellipse 50" style="animation-delay: 0.4s;" class="updcirc" cx="229" cy="663" r="41" fill="#C4C4C4" />
+                                    <circle id="Ellipse 51" style="animation-delay: 0.9s;" class="updcirc" cx="479" cy="663" r="41" fill="#C4C4C4" />
+                                </g>
+                                <g id="Group 288">
+                                    <g id="Group 285">
+                                        <g id="Rectangle 147_2">
+                                            <rect x="354" y="233" width="586" height="316" rx="66" fill="white" />
+                                            <rect x="358" y="237" width="578" height="308" rx="62" stroke="black" stroke-opacity="0.1"
+                                                stroke-width="8" />
+                                        </g>
+                                    </g>
+                                    <g id="Group 287">
+                                        <rect id="Rectangle 148" x="397" y="283" width="500" height="44" rx="22" fill="#C4C4C4" />
+                                        <rect id="Rectangle 149" x="397" y="340" width="404" height="44" rx="22" fill="#C4C4C4" />
+                                        <rect id="Rectangle 150" x="397" y="397" width="460" height="44" rx="22" fill="#C4C4C4" />
+                                        <rect id="Rectangle 151" x="397" y="454" width="283" height="44" rx="22" fill="#C4C4C4" />
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
 
+                    </div>
+                    <h2 id="welcome-h2">what</h2>
+                    <p id="welcome-p" style="text-align: center; margin-top: 10px">how do you see this...</p>
+                </div>
+                <div style="display: none;" class="rs-chat">
+                    <div class="rs-header">
+                        <div class="t-h">
+                            <img src="https://eu.ui-avatars.com/api/?name=Crib" class="pfp" />
+                            <h2 id="groupName"></h2>
+                        </div>
+                    </div>
+
+                    <div class="rs-message-box">
+
+                    </div>
+                    <div class="rs-chat-box">
+                        <div placeholder="Aa" class="chat-box-input" contenteditable="true"></div>
+                        <div class="ls-rs-chat-box">
+                            <div class="send-btn">
+                                <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="Frame 43">
+                                        <circle id="Ellipse 65" cx="22" cy="22" r="22" fill="#FA0053" />
+                                        <path id="send-polygon"
+                                            d="M30.6962 22.1244L14.1274 31.3605L19.227 23.7112C19.6599 23.062 19.6756 22.2204 19.2674 21.5554L13.8524 12.7349L30.6962 22.1244Z"
+                                            fill="white" stroke="white" stroke-width="2" />
+                                    </g>
+                                </svg>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div style="display: none;" class="sign-up-modal">
+        <div class="modal-background">
+            <div class="popup">
+                <h2>Sign In</h2>
+                <p style="margin-bottom: 10px;">Get back into Crib.</p>
+                <input id="username-email" placeholder="Username or email"/>
+                <input id="pw" placeholder="Password" type="password" />
+                <div id="signupbutton" class="button">Sign In</div>
             </div>
         </div>
     </div>
