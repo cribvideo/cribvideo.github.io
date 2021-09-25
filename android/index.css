@@ -41,7 +41,7 @@ body {
 }
 
 .cameraScreen > #cameraVideo {
-    filter: blur(25px);
+    /* filter: blur(0px); */
 }
 
 #cameraVideo {
