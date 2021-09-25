@@ -1,227 +1,125 @@
 body {
+    background-color: black !important;
     margin: 0;
-}
-
-:root {
-    --br-around: 0px;
 }
 
 * {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: var(--v-height);
-    width: 100%;
-    border-radius: var(--br-around);
-    overflow: hidden !important;
-}
-
-.app {
-    background-color: black;
-    height: 100vh;
-    width: 100%;
-    border-radius: var(--br-around);
-    overflow: hidden;
-}
-
-.cameraScreen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100% !important;
-    overflow: hidden;
-}
-
-.cameraScreen > * {
-    display: none;
-}
-
-.cameraScreen > #cameraVideo {
-    /* filter: blur(0px); */
-}
-
-#cameraVideo {
-    display: block;
-    height: var(--v-height);
-    position: fixed;
-    border-radius: var(--br-around) !important;
-    top: 50%;
-    -webkit-transform: scaleX(-1) translateY(-50%);
-    transform: scaleX(-1) translateY(-50%);
-}
-
-#cameraCanvas {
-    display: none;
-}
-
-.chatsScreen {
-    background-color: rgba(0,0,0,0.8);
-    color: white;
-    /* backdrop-filter: blur(20px); */
-    /* -webkit-backdrop-filter: blur(20px); */
-}
-.chatsScreen-top {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 10px;
-    height: 60px;
-    padding-left: 10px;
-    padding-right: 10px;
-    align-items: center;
-}
-.chatsScreen-mid {
-    height: calc(var(--v-height) - 150px);
-    overflow-y: auto;
-}
-.chatsScreen-bottom {
-    display: flex;
-    height: 60px;
-    padding-bottom: 20px;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.spectacle-btn-bar {
-    height: 30px;
-    width: 30px;
-    border: solid 5px rgba(255,255,255,1);
-    border-radius: 50%;
-}
-
-.spectacle-btn-bar:hover {
-    border: solid 5px rgba(255,255,255,1);
-    animation: spectacleBorderOff 0.6s ease;
-}
-
-@keyframes spectacleBorderOff {
-    0%{
-        padding: 0px;
-        border: solid 5px rgba(255,255,255,1);
-    }
-    50% {
-        padding: 5px;
-        border: 0
-    }
-    51% {
-        border: solid 0px rgba(255,255,255,1);;
-        padding: 0;
-    }
-    100% {
-        padding: 0px;
-        border: solid 5px rgba(255,255,255,1);
-    }
-}
-
-.profile-image > img {
-    border-radius: 50%;
-    height: 100%;
+    color: var(--invert-color);
+    margin: 0;
 }
 
 img {
     display: block;
-    pointer-events: none;
 }
 
-.icons {
-    filter: invert();
+:root {
+    --body-color: rgba(255, 255, 255, 1);
+    --invert-color: rgba(0,0,0,1);
+    --invert-color-light: rgba(0,0,0,0.2);
+    --icon-invert-on-invert: invert(0);
+    --icon-invert: invert();
 }
 
-.ring-button {
-    padding: 5px;
-    border-radius: 100px;
-    background-color: rgba(0,0,0,0.5);
-    height: 30px;
-    width: 30px;
+@media (prefers-color-scheme: dark) {
+    :root {
+        --body-color: rgba(41, 41, 41, 1);
+        --invert-color: rgba(255,255,255,1);
+        --invert-color-light: rgba(255,255,255,0.2);
+        --icon-invert-on-invert: invert();
+        --icon-invert: invert(1);
+    }
+}
+
+.app {
+    width: 100%;
+    height: var(--v-height);
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: var(--body-color);
+}
+
+.screen {
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: var(--v-height);
+}
+
+.circ-button {
+    border-radius: 50%;
+    background-color: var(--invert-color-light);
+    padding: 7px;
+    transform: scale(1);
+    transition: transform 0.3s cubic-bezier(0,.91,.54,1.01);
+}
+
+.circ-button:active {
+    transform: scale(1.2);
+}
+
+.circ-button * {
+    display: block;
+    filter: var(--icon-invert-on-invert);
+}
+
+.home {
+    overflow-y: auto;
+    height: var(--v-height);
+    scroll-snap-type: y mandatory;
+    background: black;
+}
+
+.home-camera-short {
+    height: 100px;
+    width: 100%;
+    background-color: black;
     display: flex;
-    border: solid 2px rgba(255,255,255,0);
     align-items: center;
     justify-content: center;
-    transform: scale(1);
-    transition: transform 0.2s ease, border 0.2s ease, background-color 0.2s ease;
+}
+.home-camera-short * {
+    color: var(--body-color) !important;
 }
 
-.ring-button:active {
-    background-color: rgba(0,0,0,0);
-    border: solid 2px rgba(255,255,255,0.5);
-    transform: scale(0.95);
-}
-
-.chats {
-    margin-top: 10px;
-}
-
-.chat-item {
+.home-top {
+    height: 40px;
+    padding-top: 20px;
     display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
     align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+}
+
+.home-mid {
+    height: calc(var(--v-height));
+    overflow-y: auto;
+    scroll-snap-align: start;
+    background-color: var(--body-color);
+    border-radius: 10px;
+}
+
+.conversations {
+    margin-top: 20px;
+}
+
+.conversations-item {
+    display: flex;
+    justify-content: start;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: center;
     gap: 10px;
 }
-
-.chat-item:active {
-    background-color: rgba(255,255,255,0.3);
+.conversations-item:active {
+    background-color: var(--invert-color-light);
 }
 
-.chat-item > .chat-profile-image {
-    height: 50px;
-    width: 50px;
-}
-.chat-title > * {
-    margin: 0;
-}
-
-.cameraScreen-active {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.cameraScreen-active > .blur-image {
-    display: none;
-}
-
-.cameraScreen-active > .cameraScreenUI {
-    position: fixed;
-    z-index: 2;
-    bottom: 80px;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70px;
-}
-.cameraScreen-active > .cameraScreenUI > .spectacle {
-    width: 70px;
-    height: 70px;
-    padding: 5px;
-    border: solid 8px rgba(255,255,255,1);
+.conversations-item-image > img {
+    height: 45px;
     border-radius: 50%;
-    animation: spectacleBounceUp 0.3s ease;
-    transition: padding 0.1s ease, border 0.1s ease;
-}
-
-.cameraScreen-active > .cameraScreenUI > .spectacle:active {
-    padding: 0px;
-    border: solid 12px rgba(255,255,255,1);
-}
-
-
-.inactive {
-    display: none;
-}
-
-@keyframes spectacleBounceUp {
-    0% {
-        transform: scale(0.5) translateY(146px)
-    }
-    100% {
-        transform: scale(1) translateY(0px)
-    }
 }
