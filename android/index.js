@@ -74,42 +74,9 @@ function permissionHandler(access = "get", type, cb) {
     }
 }
 
-function quickCamShots() {
-    var qcSt = setInterval(qcstInt, 5000);
-
-    qcstInt();
-
-    function qcstInt() {
-        if (currentScreen == "camera") {
-            clearInterval(qcSt);
-        }
-
-        permissionHandler("request", "camera", () => {
-            currentVars["cameraConstraints"] = navigator.userAgent.includes("iPhone") ? {video:true} : {
-                audio: false,
-                video: {
-                    facingMode: currentVars["cameraFacingMode"],
-                    width: 640,
-                    height: 480
-                }
-            };
-            var videoElem = document.getElementById("cameraVideo");
-    
-            videoElem.setAttribute('autoplay', '');
-            videoElem.setAttribute('muted', '');
-            videoElem.setAttribute('playsinline', '');
-    
-            permissionHandler("get","camera", (stream) => {
-                videoElem.srcObject = stream;
-                videoElem.play();
-            });
-        });
-    }
-}
-
 function appStart() {
 
-   quickCamShots();
+   loadQuickSnap();
 }
 
 appStart();
