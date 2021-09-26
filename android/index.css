@@ -126,6 +126,7 @@ img {
     border-radius: 50%;
 }
 
+
 .slideDown {
     animation: slideDown 0.6s cubic-bezier(0,.91,.54,1.01) forwards;
 }
@@ -186,7 +187,7 @@ img {
     overflow-x: hidden;
     border-radius: 10px;
     height: var(--v-height);
-    width: 100%;
+    width: 100%; 
     scroll-snap-type: y mandatory;
     background: black;
     position: fixed;
@@ -250,7 +251,7 @@ img {
     overflow-x: auto;
     height: var(--v-height);
     width: var(--v-width);
-    background: var(--body-color);
+    background: black;
     border-radius: 10px;
     position: fixed;
     display: flex;
@@ -262,11 +263,67 @@ img {
 .chat-top {
     height: 40px;
     padding-top: 20px;
+    padding-bottom: 10px;
+
     display: flex;
     justify-content: space-between;
     padding-left: 20px;
     padding-right: 20px;
     align-items: center;
+}
+
+.chat-mid {
+    height: calc(var(--v-height) - 40px - 20px - 40px - 20px - 25px - 25px - 10px);
+    padding-top: 25px;
+    padding-bottom: 25px;
+    overflow-y: auto;
+    width: var(--v-width);
+    display: flex;
+    flex-direction: column;
+}
+
+.me {
+    align-self: flex-end;
+    margin-right: 20px;
+}
+
+.author {
+    font-size: 80%;
+    font-weight: 700;
+}
+  
+.them {
+    margin-left: 20px;
+}
+
+.chat-message {
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 2px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 60%;
+    max-width: 300px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    animation: slideInMessage 0.3s ease forwards;
+}
+
+@keyframes slideInMessage {
+    0% {
+        margin-top: 20px;
+        opacity: 0;
+    }
+
+    100% {
+        margin-top: 10px;
+        opacity: 1;
+    }
+}
+
+.chat-top-right * {
+    text-align: right;
 }
 
 .hoz-short {
@@ -284,5 +341,7 @@ img {
     scroll-snap-align: start;
     height: var(--v-height);
     min-width: var(--v-width);
+    background-color: var(--body-color);
     overflow: hidden;
+    border-radius: 10px;
 }
