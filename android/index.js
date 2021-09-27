@@ -13,7 +13,7 @@ function initialiseHome(from = "none") {
 
     function swipeChatEventListener(e) {
         const item = e.target;
-        if (item.scrollLeft == 100) {
+        if (item.scrollLeft == 60) {
             initialiseChat();
         }
     }

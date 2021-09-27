@@ -356,3 +356,7 @@ img {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
 }
+
+.conversations-item-swipe > .hoz-short {
+    min-width: 60px !important;
+}
