@@ -109,6 +109,7 @@ img {
 
 .conversations-item {
     display: flex;
+    min-width: calc(var(--v-width) - 40px );
     justify-content: start;
     padding-left: 20px;
     padding-right: 20px;
@@ -116,6 +117,7 @@ img {
     padding-bottom: 10px;
     align-items: center;
     gap: 10px;
+    scroll-snap-align: start;
 }
 .conversations-item:active {
     background-color: var(--invert-color-light);
@@ -327,7 +329,7 @@ img {
 }
 
 .hoz-short {
-    height: var(--v-height);
+    height: 100%;
     min-width: 100px;
     display: flex;
     justify-content: center;
@@ -344,4 +346,13 @@ img {
     background-color: var(--body-color);
     overflow: hidden;
     border-radius: 10px;
+}
+
+.conversations-item-swipe {
+    display: flex;
+    height: 65px;
+    justify-content: start;
+    align-items: center;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
 }

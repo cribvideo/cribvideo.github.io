@@ -5,7 +5,18 @@ function appLoad() {
 function initialiseHome(from = "none") {
     const homeElem = document.getElementsByClassName("home")[0];
     const midElem = document.getElementsByClassName("home-mid")[0];
+    const allChatElems = document.getElementsByClassName("conversations-item-swipe");
 
+    for (const item of allChatElems) {
+        item.addEventListener('scroll', swipeChatEventListener);
+    }
+
+    function swipeChatEventListener(e) {
+        const item = e.target;
+        if (item.scrollLeft == 100) {
+            initialiseChat();
+        }
+    }
 
     if (from == "none") {
         homeElem.className = "home"
@@ -44,6 +55,9 @@ function initialiseHome(from = "none") {
             }
             homeElem.removeEventListener('scroll', homeElemScrollListener);
             midElem.removeEventListener('scroll', midElemScrollListener);
+            for (const item of allChatElems) {
+                item.removeEventListener('scroll', swipeChatEventListener);
+            }
         }
     }
 }
