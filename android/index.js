@@ -2,24 +2,129 @@ function appLoad() {
     initialiseHome();
 }
 
+function initialiseHomeChats() {
+    const ls = window.localStorage;
+    const token = ls.getItem("token");
+
+    ls.setItem("token", "eyJVc2VyQWdlbnQiOiJNb3ppbGxhLzUuMCAoWDExOyBMaW51eCB4ODZfNjQ7IHJ2OjkyLjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvOTIuMCIsImtleUJ5dGVzIjoiOWY5Yzg3NDktODMwYS00NjMyLWIwY2QtYjA2NmYwMjg3YzQ4In0=.OWZiZGY0MGItOTI0MC00NDQ3LTg4YWYtYzgzZWNmMmEyNzVi");
+    Android.sendToken(ls.getItem("token"))
+    
+    fetch("https://cribapi.ceccun.com/api/v1/chat/conversations", {
+    headers: {
+      authorization: ls.getItem("token"),
+    },
+    }).then((response) => {
+        if (response.status == 200) {
+        response.json().then((data) => {
+            var conversations = data.content;
+
+            document.getElementsByClassName('conversations')[0].innerHTML = ``;
+
+
+            conversations.forEach((item, index) => {
+                var name = item.name;
+                var id = item.id;
+                // <div class="conversations-item-swipe">
+                //         <div onclick="initialiseChat()" class="conversations-item">
+                //             <div class="conversations-item-image">
+                //                 <img src="https://eu.ui-avatars.com/api/?name=Ajaz%20C" />
+                //             </div>
+                //             <div>
+                //                 <h3>A conversation</h3>
+                //                 <p>Ejaz: Test</p>
+                //             </div>
+                //         </div>
+                //         <div class="hoz-short">
+                //             <img style="filter: invert()" src="/images/message-square.svg" />
+                //         </div>
+                // </div>
+                var title = document.createElement('h3');
+                var lastMsg = document.createElement('p');
+                var contentDiv = document.createElement('div');
+                title.innerText = name;
+                lastMsg.innerText = `Debug: idc`;
+
+                contentDiv.appendChild(title);
+                contentDiv.appendChild(lastMsg);
+                contentDiv.className = "conversations-item-div"
+
+                var imgDiv = document.createElement('div');
+                imgDiv.className = "conversations-item-image";
+                var img = document.createElement('img');
+                img.src = `https://eu.ui-avatars.com/api/?name=${encodeURIComponent(name)}`;
+                imgDiv.appendChild(img);
+
+                var convoMain = document.createElement('div');
+                convoMain.setAttribute('onclick', `initialiseChat('${id}')`);
+                convoMain.className = `conversations-item`;
+                convoMain.appendChild(imgDiv);
+                convoMain.appendChild(contentDiv);
+
+                var hoz = document.createElement('div');
+                hoz.className = "hoz-short";
+                var hozImg = document.createElement('img')
+                hozImg.src = "/images/message-square.svg";
+                hozImg.style.filter = 'invert()';
+
+                hoz.appendChild(hozImg);
+
+                var mainCon = document.createElement('div');
+                mainCon.className = "conversations-item-swipe";
+                mainCon.id = `conversation-block_${id}`;
+                mainCon.setAttribute('data-id', id);
+
+                mainCon.appendChild(convoMain);
+                mainCon.appendChild(hoz);
+
+                document.getElementsByClassName('conversations')[0].appendChild(mainCon);
+
+                document.getElementById(`conversation-block_${id}`).addEventListener('scroll', swipeChatEventListener);
+            })
+        });
+        }
+    });
+}
+
+function swipeChatEventListener(e) {
+    const item = e.target;
+    const id = e.target.getAttribute('data-id');
+    if (item.scrollLeft == 60) {
+        console.log(id);
+        initialiseChat();
+    }
+}
+
 function initialiseHome(from = "none") {
     const homeElem = document.getElementsByClassName("home")[0];
     const midElem = document.getElementsByClassName("home-mid")[0];
     const allChatElems = document.getElementsByClassName("conversations-item-swipe");
 
-    for (const item of allChatElems) {
-        item.addEventListener('scroll', swipeChatEventListener);
-    }
+    const ls = window.localStorage;
 
-    function swipeChatEventListener(e) {
-        const item = e.target;
-        if (item.scrollLeft == 60) {
-            initialiseChat();
-        }
-    }
+    // for (const item of allChatElems) {
+    //     item.addEventListener('scroll', swipeChatEventListener);
+    // }
 
     if (from == "none") {
-        homeElem.className = "home"
+        homeElem.className = "home";
+        setTimeout(() => {
+            initialiseHomeChats();
+        }, 500);
+        const funnyMessages = [
+            "Swag",
+            "Your favourite app",
+            "Welcome home, babe",
+            "You go!",
+            "Battery not included"
+        ]
+        const cribName = document.getElementById("crib-name");
+        cribName.innerText = funnyMessages[Math.floor(Math.random()*(funnyMessages.length - 1))];
+        setTimeout(() => {
+            cribName.innerText = "Swipe down to capture"
+            setTimeout(() => {
+                cribName.innerText = "Crib"
+            }, 2000)
+        }, 1000)
     }
     if (from == "camera") {
         homeElem.className = "home slideUpIn"
@@ -157,3 +262,5 @@ setInterval(() => {
     }
 }, 10);
 appLoad();
+
+navigator.serviceWorker.register('/android-sw.js');

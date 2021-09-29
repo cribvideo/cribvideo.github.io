@@ -16,7 +16,8 @@ img {
 :root {
     --body-color: rgba(255, 255, 255, 1);
     --invert-color: rgba(0,0,0,1);
-    --invert-color-light: rgba(0,0,0,0.2);
+    --invert-color-superlight: rgba(0,0,0,0.05);
+    --invert-color-light: rgba(0,0,0,0.1);
     --icon-invert-on-invert: invert(0);
     --icon-invert: invert();
 }
@@ -25,6 +26,7 @@ img {
     :root {
         --body-color: rgba(41, 41, 41, 1);
         --invert-color: rgba(255,255,255,1);
+        --invert-color-superlight: rgba(255,255,255,0.05);
         --invert-color-light: rgba(255,255,255,0.2);
         --icon-invert-on-invert: invert();
         --icon-invert: invert(1);
@@ -98,6 +100,7 @@ img {
 .home-mid {
     height: calc(var(--v-height));
     overflow-y: auto;
+    overflow-x: hidden;
     scroll-snap-align: start;
     background-color: var(--body-color);
     border-radius: 10px;
@@ -109,7 +112,8 @@ img {
 
 .conversations-item {
     display: flex;
-    min-width: calc(var(--v-width) - 40px );
+    min-width: calc(var(--v-width) - 40px);
+    max-width: calc(var(--v-width) - 40px);
     justify-content: start;
     padding-left: 20px;
     padding-right: 20px;
@@ -119,12 +123,50 @@ img {
     gap: 10px;
     scroll-snap-align: start;
 }
+
+.conversations-item-skel {
+    display: flex;
+    min-width: calc(var(--v-width) - 40px );
+    justify-content: start;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: center;
+    gap: 10px;
+    scroll-snap-align: start;
+    overflow: hidden;
+}
+
+.conversations-item-div {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.conversations-item-title {
+    height: 24px;
+    width: 150px;
+}
+
+.conversations-item-content {
+    height: 15px;
+    width: 40px;
+}
+
 .conversations-item:active {
     background-color: var(--invert-color-light);
 }
 
+.conversations-item-image {
+    height: 45px;
+    width: 45px;
+    border-radius: 50% !important;
+}
+
 .conversations-item-image > img {
     height: 45px;
+    width: 45px;
     border-radius: 50%;
 }
 
@@ -384,3 +426,28 @@ img {
 .conversations-item-swipe > .hoz-short {
     min-width: 60px !important;
 }
+
+.skel {
+       /* background-color: var(--skel-color); */
+       border-radius: 5px;
+       margin-bottom: 5px;
+       background-color: var(--skel-color);
+       background: linear-gradient(
+         270deg,
+         var(--invert-color-superlight) 45%,
+         var(--invert-color-light),
+         var(--invert-color-superlight) 70%
+       );
+       animation: skel 0.8s ease-out infinite;
+       background-size: 300% 300%;
+}
+
+
+@keyframes skel {
+    0% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
