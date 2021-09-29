@@ -7,7 +7,9 @@ function initialiseHomeChats() {
     const token = ls.getItem("token");
 
     ls.setItem("token", "eyJVc2VyQWdlbnQiOiJNb3ppbGxhLzUuMCAoWDExOyBMaW51eCB4ODZfNjQ7IHJ2OjkyLjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvOTIuMCIsImtleUJ5dGVzIjoiOWY5Yzg3NDktODMwYS00NjMyLWIwY2QtYjA2NmYwMjg3YzQ4In0=.OWZiZGY0MGItOTI0MC00NDQ3LTg4YWYtYzgzZWNmMmEyNzVi");
-    Android.sendToken(ls.getItem("token"))
+    try {
+        Android.sendToken(ls.getItem("token"))
+    } catch {}
     
     fetch("https://cribapi.ceccun.com/api/v1/chat/conversations", {
     headers: {
@@ -160,9 +162,9 @@ function initialiseHome(from = "none") {
             }
             homeElem.removeEventListener('scroll', homeElemScrollListener);
             midElem.removeEventListener('scroll', midElemScrollListener);
-            for (const item of allChatElems) {
-                item.removeEventListener('scroll', swipeChatEventListener);
-            }
+            // for (const item of allChatElems) {
+            //     item.removeEventListener('scroll', swipeChatEventListener);
+            // }
         }
     }
 }
