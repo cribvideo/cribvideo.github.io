@@ -251,6 +251,15 @@ function initialiseCamera(prepare = false, prepareCb = 'none') {
 var lastHeight = 0;
 var lastWidth = 0;
 
+document.getElementById("root-style").innerHTML = `
+        :root {
+            --v-height: ${window.innerHeight}px;
+            --v-width: ${window.innerWidth}px;
+        }
+        `;
+lastHeight = window.innerHeight;
+lastWidth = window.innerWidth;
+
 setInterval(() => {
     if (lastHeight != window.innerHeight || lastWidth != window.innerWidth) {
         document.getElementById("root-style").innerHTML = `
