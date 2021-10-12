@@ -1,453 +1,456 @@
 body {
-    background-color: black !important;
-    margin: 0;
+  background-color: black !important;
+  margin: 0;
 }
 
 * {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color: var(--invert-color);
-    margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: var(--invert-color);
+  margin: 0;
 }
 
 img {
-    display: block;
+  display: block;
 }
 
 :root {
-    --body-color: rgba(255, 255, 255, 1);
-    --invert-color: rgba(0,0,0,1);
-    --invert-color-superlight: rgba(0,0,0,0.05);
-    --invert-color-light: rgba(0,0,0,0.1);
-    --icon-invert-on-invert: invert(0);
-    --icon-invert: invert();
+  --body-color: rgba(255, 255, 255, 1);
+  --invert-color: rgba(0, 0, 0, 1);
+  --invert-color-superlight: rgba(0, 0, 0, 0.05);
+  --invert-color-light: rgba(0, 0, 0, 0.1);
+  --icon-invert-on-invert: invert(0);
+  --icon-invert: invert();
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --body-color: rgba(41, 41, 41, 1);
-        --invert-color: rgba(255,255,255,1);
-        --invert-color-superlight: rgba(255,255,255,0.05);
-        --invert-color-light: rgba(255,255,255,0.2);
-        --icon-invert-on-invert: invert();
-        --icon-invert: invert(1);
-    }
+  :root {
+    --body-color: rgba(41, 41, 41, 1);
+    --invert-color: rgba(255, 255, 255, 1);
+    --invert-color-superlight: rgba(255, 255, 255, 0.05);
+    --invert-color-light: rgba(255, 255, 255, 0.2);
+    --icon-invert-on-invert: invert();
+    --icon-invert: invert(1);
+  }
 }
 
 .app {
-    width: 100%;
-    height: var(--v-height);
-    overflow: hidden;
-    border-radius: 10px;
-    background-color: black;
+  width: 100%;
+  height: var(--v-height);
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: black;
 }
 
 .screen {
-    position: fixed;
-    top:0;
-    left:0;
-    width: 100%;
-    height: var(--v-height);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--v-height);
 }
 
 .circ-button {
-    border-radius: 50%;
-    background-color: var(--invert-color-light);
-    padding: 7px;
-    transform: scale(1);
-    transition: transform 0.3s cubic-bezier(0,.91,.54,1.01);
+  border-radius: 50%;
+  background-color: var(--invert-color-light);
+  padding: 7px;
+  transform: scale(1);
+  transition: transform 0.3s cubic-bezier(0, 0.91, 0.54, 1.01);
 }
 
 .circ-button:active {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .circ-button * {
-    display: block;
-    filter: var(--icon-invert-on-invert);
+  display: block;
+  filter: var(--icon-invert-on-invert);
 }
 
 .home {
-    overflow-y: auto;
-    height: var(--v-height);
-    width: 100%;
-    scroll-snap-type: y mandatory;
-    background: black;
-    position: fixed;
+  overflow-y: auto;
+  height: var(--v-height);
+  width: 100%;
+  scroll-snap-type: y mandatory;
+  background: black;
+  position: fixed;
 }
 
 .short {
-    height: 100px;
-    width: 100%;
-    background-color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 100px;
+  width: 100%;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .short * {
-    color: var(--body-color) !important;
+  color: var(--body-color) !important;
 }
 
 .home-top {
-    height: 40px;
-    padding-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    padding-left: 20px;
-    padding-right: 20px;
-    align-items: center;
+  height: 40px;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  align-items: center;
 }
 
 .home-mid {
-    height: calc(var(--v-height));
-    overflow-y: auto;
-    overflow-x: hidden;
-    scroll-snap-align: start;
-    background-color: var(--body-color);
-    border-radius: 10px;
+  height: calc(var(--v-height));
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-align: start;
+  background-color: var(--body-color);
+  border-radius: 10px;
 }
 
 .conversations {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .conversations-item {
-    display: flex;
-    min-width: calc(var(--v-width) - 40px);
-    max-width: calc(var(--v-width) - 40px);
-    justify-content: start;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    align-items: center;
-    gap: 10px;
-    scroll-snap-align: start;
+  display: flex;
+  min-width: calc(var(--v-width) - 40px);
+  max-width: calc(var(--v-width) - 40px);
+  justify-content: start;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  align-items: center;
+  gap: 10px;
+  scroll-snap-align: start;
 }
 
 .conversations-item-skel {
-    display: flex;
-    min-width: calc(var(--v-width) - 40px );
-    justify-content: start;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    align-items: center;
-    gap: 10px;
-    scroll-snap-align: start;
-    overflow: hidden;
+  display: flex;
+  min-width: calc(var(--v-width) - 40px);
+  justify-content: start;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  align-items: center;
+  gap: 10px;
+  scroll-snap-align: start;
+  overflow: hidden;
 }
 
 .conversations-item-div {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 .conversations-item-title {
-    height: 24px;
-    width: 150px;
+  height: 24px;
+  width: 150px;
 }
 
 .conversations-item-content {
-    height: 15px;
-    width: 40px;
+  height: 15px;
+  width: 40px;
 }
 
 .conversations-item:active {
-    background-color: var(--invert-color-light);
+  background-color: var(--invert-color-light);
 }
 
 .conversations-item-image {
-    height: 45px;
-    width: 45px;
-    border-radius: 50% !important;
+  height: 45px;
+  width: 45px;
+  border-radius: 50% !important;
 }
 
 .conversations-item-image > img {
-    height: 45px;
-    width: 45px;
-    border-radius: 50%;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
 }
 
-
 .slideDown {
-    animation: slideDown 0.6s cubic-bezier(0,.91,.54,1.01) forwards;
+  animation: slideDown 0.6s cubic-bezier(0, 0.91, 0.54, 1.01) forwards;
 }
 
 .slideUpIn {
-    animation: slideUpIn 0.6s cubic-bezier(0,.91,.54,1.01) forwards;
+  animation: slideUpIn 0.6s cubic-bezier(0, 0.91, 0.54, 1.01) forwards;
 }
 
 .slideRightIn {
-    animation: slideRightIn 0.6s cubic-bezier(0,.91,.54,1.01) forwards;
+  animation: slideRightIn 0.6s cubic-bezier(0, 0.91, 0.54, 1.01) forwards;
 }
 
 .slideRightOut {
-    animation: slideRightOut 0.6s cubic-bezier(0,.91,.54,1.01) forwards;
+  animation: slideRightOut 0.6s cubic-bezier(0, 0.91, 0.54, 1.01) forwards;
 }
 
 @keyframes slideRightOut {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(100%);
-    }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 @keyframes slideRightIn {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(0);
-    }
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
-
 
 @keyframes slideUpIn {
-    0% {
-        transform: translateY(100%);
-    }
-    100% {
-        transform: translateY(0);
-    }
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
-
 @keyframes slideDown {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(100%);
-    }
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
 }
 
 .camera {
-    opacity: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    border-radius: 10px;
-    height: var(--v-height);
-    width: 100%; 
-    scroll-snap-type: y mandatory;
-    background: black;
-    position: fixed;
-    animation: fadeIn 0.2s ease 0.6s forwards;
+  opacity: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 10px;
+  height: var(--v-height);
+  width: 100%;
+  scroll-snap-type: y mandatory;
+  background: black;
+  position: fixed;
+  animation: fadeIn 0.2s ease 0.6s forwards;
 }
 
 .camera-main {
-    border-radius: 10px;
-    overflow: hidden;
-    scroll-snap-align: start;
+  border-radius: 10px;
+  overflow: hidden;
+  scroll-snap-align: start;
 }
 
 .camera-main > video {
-    height: var(--v-height);
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%) scale(-1, 1);
+  height: var(--v-height);
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%) scale(-1, 1);
 }
 
 .camera-bar {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    position: fixed;
-    bottom: 100px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: fixed;
+  bottom: 100px;
 }
 
 .camera-spectacle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    padding: 3px;
-    border: solid 6px rgba(255,255,255,1);
-    transition: border 0.2s ease, padding 0.2s ease;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  padding: 3px;
+  border: solid 6px rgba(255, 255, 255, 1);
+  transition: border 0.2s ease, padding 0.2s ease;
 }
 
 .camera-spectacle:active {
-    padding: 0px;
-    border: solid 9px rgba(255,255,255,1);
+  padding: 0px;
+  border: solid 9px rgba(255, 255, 255, 1);
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .fadeIn {
-    animation: fadeIn 0.3s ease forwards;
+  animation: fadeIn 0.3s ease forwards;
 }
 
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .chat {
-    overflow-y: hidden;
-    overflow-x: auto;
-    height: var(--v-height);
-    width: var(--v-width);
-    background: black;
-    border-radius: 10px;
-    position: fixed;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    scroll-snap-type: x mandatory;
+  overflow-y: hidden;
+  overflow-x: auto;
+  height: var(--v-height);
+  width: var(--v-width);
+  background: black;
+  border-radius: 10px;
+  position: fixed;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  scroll-snap-type: x mandatory;
 }
 
 .chat-top {
-    height: 40px;
-    padding-top: 20px;
-    padding-bottom: 10px;
+  height: 40px;
+  padding-top: 20px;
+  padding-bottom: 10px;
 
-    display: flex;
-    justify-content: space-between;
-    padding-left: 20px;
-    padding-right: 20px;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  align-items: center;
 }
 
 .chat-mid {
-    height: calc(var(--v-height) - 40px - 20px - 10px - 25px - 25px - 40px - 20px - 10px);
-    padding-top: 25px;
-    padding-bottom: 25px;
-    overflow-y: auto;
-    width: var(--v-width);
-    display: flex;
-    flex-direction: column;
+  height: calc(
+    var(--v-height) - 40px - 20px - 10px - 25px - 25px - 40px - 20px - 10px
+  );
+  padding-top: 25px;
+  padding-bottom: 25px;
+  overflow-y: auto;
+  width: var(--v-width);
+  display: flex;
+  flex-direction: column;
 }
 
 .chat-bottom {
-    height: 40px;
-    padding-bottom: 20px;
-    padding-top: 10px;
+  height: 40px;
+  padding-bottom: 20px;
+  padding-top: 10px;
 
-    display: flex;
-    justify-content: space-between;
-    padding-left: 20px;
-    padding-right: 20px;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  align-items: center;
 }
 
 .chat-bar {
-    background: var(--invert-color-light);
-    color: var(--invert-color);
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: start;
+  background: var(--invert-color-light);
+  color: var(--invert-color);
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  max-height: 35px;
+  overflow: auto;
 }
 
-
 .me {
-    align-self: flex-end;
-    margin-right: 20px;
+  align-self: flex-end;
+  margin-right: 20px;
 }
 
 .author {
-    font-size: 80%;
-    font-weight: 700;
+  font-size: 80%;
+  font-weight: 700;
 }
-  
+
 .them {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 .chat-message {
-    padding: 10px;
-    border-radius: 10px;
-    border: solid 2px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    width: 60%;
-    max-width: 300px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    animation: slideInMessage 0.3s ease forwards;
+  padding: 10px;
+  border-radius: 10px;
+  border: solid 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 60%;
+  max-width: 300px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  animation: slideInMessage 0.3s ease forwards;
 }
 
 @keyframes slideInMessage {
-    0% {
-        margin-top: 20px;
-        opacity: 0;
-    }
+  0% {
+    margin-top: 20px;
+    opacity: 0;
+  }
 
-    100% {
-        margin-top: 10px;
-        opacity: 1;
-    }
+  100% {
+    margin-top: 10px;
+    opacity: 1;
+  }
 }
 
 .chat-top-right * {
-    text-align: right;
+  text-align: right;
 }
 
 .hoz-short {
-    height: 100%;
-    min-width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    flex-grow: 1;
+  height: 100%;
+  min-width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  flex-grow: 1;
 }
 
 .chat-main {
-    flex-grow: 1;
-    scroll-snap-align: start;
-    height: var(--v-height);
-    min-width: var(--v-width);
-    background-color: var(--body-color);
-    overflow: hidden;
-    border-radius: 10px;
+  flex-grow: 1;
+  scroll-snap-align: start;
+  height: var(--v-height);
+  min-width: var(--v-width);
+  background-color: var(--body-color);
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.message-box {
+  width: var(--v-width);
+  display: flex;
+  flex-direction: column;
 }
 
 .conversations-item-swipe {
-    display: flex;
-    height: 65px;
-    justify-content: start;
-    align-items: center;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+  display: flex;
+  height: 65px;
+  justify-content: start;
+  align-items: center;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
 }
 
 .conversations-item-swipe > .hoz-short {
-    min-width: 60px !important;
+  min-width: 60px !important;
 }
 
 .skel {
-       /* background-color: var(--skel-color); */
-       border-radius: 5px;
-       margin-bottom: 5px;
-       background-color: var(--skel-color);
-       background: linear-gradient(
-         270deg,
-         var(--invert-color-superlight) 45%,
-         var(--invert-color-light),
-         var(--invert-color-superlight) 70%
-       );
-       animation: skel 0.8s ease-out infinite;
-       background-size: 300% 300%;
+  /* background-color: var(--skel-color); */
+  border-radius: 5px;
+  margin-bottom: 5px;
+  background-color: var(--skel-color);
+  background: linear-gradient(
+    270deg,
+    var(--invert-color-superlight) 45%,
+    var(--invert-color-light),
+    var(--invert-color-superlight) 70%
+  );
+  animation: skel 0.8s ease-out infinite;
+  background-size: 300% 300%;
 }
 
-
 @keyframes skel {
-    0% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+  0% {
+    background-position: 100% 50%;
   }
+  100% {
+    background-position: 0% 50%;
+  }
+}
