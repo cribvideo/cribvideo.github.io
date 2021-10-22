@@ -169,14 +169,17 @@ function initialiseHome(from = "none") {
     }
 }
 
-function initialiseChat() {
+function initialiseChat(id) {
     const chatElem = document.getElementById("chat");
     chatElem.className = "chat slideRightIn";
 
     const chatBackButton = document.getElementById("chat-back-button");
+    const chatBar = document.getElementsByClassName("chat-bar")[0];
     chatElem.addEventListener('scroll', chatElemScrollListener)
 
     chatBackButton.addEventListener('click', chatBackElemScrollListener);
+
+    chatBar.addEventListener('keyup', keyBoardTrigger);
 
     function chatBackElemScrollListener() {
         chatElem.className = "chat slideRightOut";
@@ -184,11 +187,16 @@ function initialiseChat() {
         chatBackButton.removeEventListener('click', chatElemScrollListener);
     }
 
+    function keyBoardTrigger(e) {
+        console.log(e);
+    }
+
     function chatElemScrollListener() {
         if (chatElem.scrollLeft == 0) {
             chatElem.className = "chat slideRightOut";
             chatElem.removeEventListener('scroll', chatElemScrollListener);
             chatBackButton.removeEventListener('click', chatElemScrollListener);
+            chatBar.removeEventListener('keyup', keyBoardTrigger);
         }
     }
 }
