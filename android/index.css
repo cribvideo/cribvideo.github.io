@@ -439,6 +439,12 @@ img {
   min-width: 60px !important;
 }
 
+.message-box {
+  width: var(--v-width);
+  display: flex;
+  flex-direction: column;
+}
+
 .skel {
   /* background-color: var(--skel-color); */
   border-radius: 5px;
