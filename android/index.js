@@ -196,12 +196,15 @@ function initialiseChat(chatID) {
   const ls = window.localStorage;
   const token = ls.getItem("token");
   const chatElem = document.getElementById("chat");
+  const chatBarElem = document.getElementsByClassName("chat-bar")[0];
   chatElem.className = "chat slideRightIn";
 
   const chatBackButton = document.getElementById("chat-back-button");
   chatElem.addEventListener("scroll", chatElemScrollListener);
 
   chatBackButton.addEventListener("click", chatBackElemScrollListener);
+
+  chatBarElem.addEventListener("keydown", sendMessageListener);
 
   fetch(
     `https://cribapi.ceccun.com/api/v1/chat/conversations/${chatID}/details`,
@@ -269,6 +272,41 @@ function initialiseChat(chatID) {
       chatElem.removeEventListener("scroll", chatElemScrollListener);
       chatBackButton.removeEventListener("click", chatElemScrollListener);
       current["conversation"] = "";
+    }
+  }
+
+  function sendMessageListener(e) {
+    const message = chatBarElem.innerText.trim();
+
+    if (message == "") {
+      chatBarElem.innerHTML = "";
+    }
+
+    if (e.keyCode == 13 && !e.shiftKey) {
+      e.preventDefault();
+      if (message != "") {
+        var id = "@me";
+        const dtHost = new Date;
+        parseMessage(message, "@me", dtHost.getTime(), null, "text", "tbd", document.getElementsByClassName("chat-mid")[0], (id) => {
+          fetch(`https://cribapi.ceccun.com/api/v1/chat/conversations/${current["conversation"]}/send`, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+              authorization: ls.getItem('token'),
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              content: message,
+              type: "text"
+            })
+          }).then((response) => {
+            if (response.status == 200) {
+              document.getElementById(id).className = "chat-message me";
+            }
+          })
+        });
+        chatBarElem.innerHTML = "";
+      }
     }
   }
 }
@@ -350,7 +388,7 @@ const resolveName = (id, cb = () => {}) => {
       if (response.status == 200) {
         response.json().then((data) => {
           ls.setItem(`.cache_${url}`, btoa(JSON.stringify(data.content)));
-          cb(data.content.name, data.content.pfp);
+          cb(data.content.name, data.content.pfp, data.content.id);
         });
       }
     });
@@ -364,7 +402,8 @@ const parseMessage = (
   reply = undefined,
   type,
   id = undefined,
-  element = document.getElementsByClassName("rs-message-box")[0]
+  element = document.getElementsByClassName("rs-message-box")[0],
+  cb = ""
 ) => {
   const messageUUID = btoa(Math.random());
   var ls = window.localStorage;
@@ -377,10 +416,16 @@ const parseMessage = (
 
   var chatModal = document.createElement("div");
   chatModal.className = "chat-message them";
+  chatModal.setAttribute("id", messageUUID);
   var author = document.createElement("div");
   author.id = `${messageUUID}_author`;
-  if (authorID == myId.id) {
-    chatModal.className = "chat-message me";
+  if (authorID == myId.id || authorID == "@me") {
+    var cmClassState = "chat-message me";
+    if (id == "tbd") {
+      cmClassState = "chat-message me sending";
+      cb(messageUUID);
+    }
+    chatModal.className = cmClassState;
   }
   author.className = "author";
   var content = document.createElement("div");

@@ -23,6 +23,10 @@ self.addEventListener("fetch", function (event) {
         if (event.request.url.startsWith("https://cribapi.ceccun.com")) {
           currentStore = data_cache_store;
         }
+
+        if (event.request.method == 'POST') {
+          return response;
+        }
         return caches.open(currentStore).then((cache) => {
           cache.put(event.request, response.clone());
           return response;
