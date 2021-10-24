@@ -187,6 +187,38 @@ img {
   animation: slideRightOut 0.6s cubic-bezier(0, 0.91, 0.54, 1.01) forwards;
 }
 
+.pinchOut {
+  animation: pinchOut 0.6s cubic-bezier(0, 0.91, 0.54, 1.01) forwards;
+}
+
+.pinchIn {
+  animation: pinchIn 0.6s cubic-bezier(0, 0.91, 0.54, 1.01) forwards;
+}
+
+
+@keyframes pinchIn {
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+}
+
+
+@keyframes pinchOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+}
+
 @keyframes slideRightOut {
   0% {
     transform: translateX(0);
@@ -291,10 +323,11 @@ img {
 .chat {
   overflow-y: hidden;
   overflow-x: auto;
-  height: var(--v-height);
+  height: 100vh;
+  max-height: var(--v-height);
   width: var(--v-width);
   background: black;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   position: fixed;
   display: flex;
   align-items: flex-start;
@@ -415,8 +448,7 @@ img {
 .chat-main {
     flex-grow: 1;
     scroll-snap-align: start;
-    height: 100vh;
-
+    height: 200vh;
     max-height: var(--v-height);
     min-width: var(--v-width);
     background-color: var(--body-color);
@@ -458,6 +490,26 @@ img {
   );
   animation: skel 0.8s ease-out infinite;
   background-size: 300% 300%;
+}
+
+.skel-message {
+  padding: 10px;
+  border-radius: 10px;
+  border: solid 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 60%;
+  max-width: 300px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin-top: 10px;
+  user-select: none;
+}
+
+.skel-message div {
+  opacity: 0;
+  user-select: none;
 }
 
 @keyframes skel {
